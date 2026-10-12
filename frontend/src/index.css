@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+/* Design tokens. Interface colours are neutral with a restrained teal accent;
+   orange and red are reserved for heat data. */
+@theme {
+  --color-page: #f5f6f4;
+  --color-surface: #ffffff;
+  --color-ink: #10191d;
+  --color-ink-2: #46525a;
+  --color-ink-3: #6b767d;
+  --color-line: #dfe3e0;
+  --color-line-soft: #eceeec;
+  --color-accent: #0f5f73;
+  --color-accent-strong: #0a4656;
+  --color-accent-soft: #e6f1f3;
+  --color-heat: #eb6834;
+  --color-heat-strong: #b8431a;
+  --color-heat-red: #e34948;
+  --color-heat-soft: #fdf0ea;
+  --color-trend: #2a78d6;
+  --color-warn-bg: #fff7e6;
+  --color-warn-line: #f0c36d;
+  --color-warn-ink: #6b4a00;
+  --color-danger-bg: #fdecec;
+  --color-danger-line: #e9a3a3;
+  --color-danger-ink: #8a1f1f;
+
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background: var(--color-page);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* One visible focus style for every interactive control. */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Recharts draws its own focus rectangle around the SVG on click; remove it. */
+.recharts-wrapper:focus,
+.recharts-surface:focus,
+.recharts-wrapper *:focus {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

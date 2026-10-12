@@ -1,0 +1,23 @@
+# Render blueprint for the FastAPI backend.
+# Secrets (MONGODB_URI) and the frontend origin are entered in the Render dashboard.
+services:
+  - type: web
+    name: climate-hazard-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: APP_ENV
+        value: production
+      - key: TRUST_PROXY_HEADERS
+        value: "true"
+      - key: MONGODB_DB
+        value: climate_hazards
+      - key: MONGODB_URI
+        sync: false
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
