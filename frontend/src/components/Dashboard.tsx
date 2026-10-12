@@ -59,7 +59,12 @@ export function Dashboard() {
     <div className="min-h-screen">
       <Header />
       <main className="mx-auto max-w-7xl space-y-4 px-4 py-5 sm:px-6">
-        {locations.isPending && <LoadingState label="Connecting to the analysis service…" />}
+        {locations.isPending && (
+          <LoadingState
+            label="Connecting to the analysis service…"
+            detail="The server runs on free hosting that sleeps when idle. If it was asleep, waking it can take up to a minute. This page continues automatically; there is no need to reload."
+          />
+        )}
         {locations.isError && (
           <ErrorState error={locations.error} onRetry={() => void locations.refetch()} />
         )}

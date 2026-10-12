@@ -1,8 +1,14 @@
 interface Props {
   label: string;
+  /** Replaces the default explanation under the label. */
+  detail?: string;
 }
 
-export function LoadingState({ label }: Props) {
+const DEFAULT_DETAIL =
+  "The first analysis of a location downloads about 30 years of daily data and can take up to a " +
+  "minute. Repeat requests are served from the database.";
+
+export function LoadingState({ label, detail = DEFAULT_DETAIL }: Props) {
   return (
     <div role="status" aria-live="polite" className="space-y-3">
       <div className="flex items-center gap-3 rounded-lg border border-line bg-surface p-4">
@@ -12,10 +18,7 @@ export function LoadingState({ label }: Props) {
         />
         <div>
           <p className="text-sm font-medium text-ink">{label}</p>
-          <p className="text-xs text-ink-3">
-            The first analysis of a location downloads about 30 years of daily data and can take up to
-            a minute. Repeat requests are served from the database.
-          </p>
+          <p className="text-xs text-ink-3">{detail}</p>
         </div>
       </div>
       <div aria-hidden="true" className="grid grid-cols-2 gap-3 lg:grid-cols-4">

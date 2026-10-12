@@ -8,7 +8,10 @@ export function useLocations() {
     queryKey: ["locations"],
     queryFn: ({ signal }) => fetchLocations(signal),
     staleTime: Infinity,
-    retry: 1,
+    // A sleeping free-tier server can drop or refuse the first request while it
+    // starts, so keep trying for about a minute before showing an error.
+    retry: 6,
+    retryDelay: 10_000,
   });
 }
 
