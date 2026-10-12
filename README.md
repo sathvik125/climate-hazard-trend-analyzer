@@ -6,6 +6,14 @@ time. It fetches ERA5 reanalysis data from the Open-Meteo Historical Weather API
 MongoDB, detects heatwaves with a documented operational definition, and presents annual charts,
 an event table and deliberately cautious trend statements.
 
+## Live demo
+
+- **App:** <https://climate-hazard-trend-analyzer-kappa.vercel.app/>
+- **API health:** <https://climate-hazard-api-901k.onrender.com/api/health>
+
+The backend runs on a free Render instance that sleeps when idle, so the first request after a
+quiet period can take up to a minute. Requests after that are fast.
+
 ## Feature overview
 
 - Five preset cities (Hyderabad, Delhi, Mumbai, Bengaluru, Chennai) plus custom latitude/longitude.
@@ -525,7 +533,7 @@ What was actually run during development, and what was not:
 | Live Open-Meteo request through the real client and services (Hyderabad 1990-2020) | Passed; second request was a cache hit with no provider call |
 | Dashboard driven in headless Chrome at 390, 768 and 1360 px | Rendered correctly, no horizontal overflow |
 | Real MongoDB Atlas (free M0), run locally | Passed. Hyderabad 1990-2020: first request 11.9 s (11,323 days fetched and stored, 2 provider calls); repeat request 0.1 s, cache hit, no provider call. All three collections and their unique/TTL indexes were created on the cluster |
-| Render and Vercel deployment | **Not performed.** The instructions above are untested against live accounts |
+| Deployed app (Vercel + Render + Atlas), driven in headless Chrome | Passed. Hyderabad 1990-2020 loaded from the database cache; a point picked on the map (24.69°N, 75.85°E) was fetched and analysed fresh (11,323 days); CSV export returned `text/csv`; no console errors or failed requests; `/docs` is disabled in production |
 
 ## Assumptions and known limitations
 
